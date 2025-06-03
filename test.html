@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SocketIO Test</title>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>SocketIO Test</h1>
+  <p>Status: <span id="status">Venter...</span></p>
+  <script>
+    var socket = io({transports: ['polling']});
+    socket.on('connect', function() {
+      document.getElementById('status').innerText = 'Forbundet til server!';
+      alert('SocketIO: Forbundet til server!');
+    });
+    socket.on('data_update', function(data) {
+      document.getElementById('status').innerText = 'Data modtaget: ' + JSON.stringify(data);
+    });
+    // Du kan også sende en test event:
+    socket.emit('get_data');
+  </script>
+</body>
+</html>

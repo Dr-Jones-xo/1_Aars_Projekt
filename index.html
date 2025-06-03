@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Live Dashboard
+{% endblock %}
+
+{% block content %}
+<h1>Live Dashboard</h1>
+<p>Status: <span id="status">Venter...</span></p>
+<p>Live temperatur: <span id="live_temp">Henter...</span></p>
+<p>Live fugtighed: <span id="live_hum">Henter...</span></p>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+  var socket = io({transports: ['polling']});
+  function hentData() {
+    socket.emit('get_data');
+  }
+  socket.on('connect', function() {
+    document.getElementById('status').innerText = 'Forbundet til server!';
+    hentData();
+    setInterval(hentData, 5000); // Hent data hvert 5. sekund
+  });
+  socket.on('data_update', function(data) {
+    document.getElementById('status').innerText = 'Data modtaget!';
+    document.getElementById('live_temp').innerText = data.temp;
+    document.getElementById('live_hum').innerText = data.hum;
+  });
+</script>
+{% endblock %}

@@ -16,7 +16,6 @@
     socket.on('data_update', function(data) {
       document.getElementById('status').innerText = 'Data modtaget: ' + JSON.stringify(data);
     });
-    // Du kan også sende en test event:
     socket.emit('get_data');
   </script>
 </body>

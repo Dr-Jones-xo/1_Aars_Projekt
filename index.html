@@ -21,7 +21,7 @@ Live Dashboard
   socket.on('connect', function() {
     document.getElementById('status').innerText = 'Forbundet til server!';
     hentData();
-    setInterval(hentData, 5000); // Hent data hvert 5. sekund
+    setInterval(hentData, 5000); 
   });
   socket.on('data_update', function(data) {
     document.getElementById('status').innerText = 'Data modtaget!';

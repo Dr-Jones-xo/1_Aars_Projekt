@@ -1,10 +1,10 @@
 import sqlite3
 def get_TOF_data(number_of_rows):
-    query = """SELECT * FROM TOF ORDER BY Dato DESC;"""  # Skiftet fra 'stue' til 'TOF'
+    query = """SELECT * FROM TOF ORDER BY Dato DESC;"""  
     Dato = []
     Temp = []
     Hum = []
-    conn = None  # <-- Sæt conn til None fra start
+    conn = None  
 
     try:
         conn = sqlite3.connect("database/Temp.db")
@@ -28,5 +28,5 @@ def get_TOF_data(number_of_rows):
         return [], [], []
 
     finally:
-        if conn:  # <-- Tjek at conn findes, før close
+        if conn:  
             conn.close()

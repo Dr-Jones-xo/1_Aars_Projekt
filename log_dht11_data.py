@@ -3,7 +3,6 @@ from Dato import Dato
 from random import randint
 from time import sleep
 
-# Registrer datetime-adapter
 sqlite3.register_adapter(Dato, lambda dt: dt.isoformat())
 
 def create_table():
@@ -31,7 +30,7 @@ def log_stue_DHT11():
         temp = randint(0, 30)
         hum = randint(0, 100)
         now = Dato.now().strftime("%d/%m/%y %H:%M:%S")
-        data = (temp, hum, now)  # RIGTIG rækkefølge!
+        data = (temp, hum, now)  
 
         try:
             conn = sqlite3.connect("database/Temp.db")
@@ -48,8 +47,6 @@ def log_stue_DHT11():
         
         sleep(1)
 
-# Kald funktionen for at oprette tabellen
 create_table()
 
-# Start logging af data
 log_stue_DHT11()
